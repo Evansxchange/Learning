@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="my-3 text-center shadow bg-light mx-5 p-2">{{ object.author.first_name|title }} Course Page</h1>
+<h4 class="mx-5 fw-bold">Total Posts: ({{ page_obj.paginator.count }})</h4>
+
+{% for Posts in Posts %}
+<div class="container-md shadow p-3 mb-2 bg-light rounded">
+ <div class="head d-flex px-2 align-items-center bg-light shadow-lg rounded">
+  <img class="rounded-circle" width="40rem" src="{{ Posts.author.profile.image.url }}" alt="">
+  <p class="fw-bolder align-self-center mx-3 pt-2" >Author: {{ Posts.author.first_name|title }}</p>
+  <P class=" fw-bold align-self-center pt-2">|  Date Posted: {{ Posts.date_posted }}</P>
+ </div>
+<P class="shadow p-3 mt-3 text-start bg-white shadow rounded fw-bold"><a href="{% url 'post_detail' Posts.id %}">Post-Title : {{ Posts.title|title }}</a></P>
+<P class="bg-white shadow-sm rounded p-2">{{ Posts.content }}</P>
+</div>
+{% endfor %}
+<div class="container text-center">
+ {% if is_paginated %}
+ 
+ {% if page_obj.has_previous %}
+  <a class="btn btn-outline-primary mx-1 mb-4" href="?page=1">First</a>
+  <a class="btn btn-outline-primary mx-1 mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+ {% endif %}
+
+ {% for num in page_obj.paginator.page_range %}
+  {% if page_obj.number == num %}
+   <a class="btn btn-primary mx-1 mb-4" href="?page={{ num }}">{{ num }}</a>
+  {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
+  <a class="btn btn-outlineprimary mx-1 mb-4" href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+ {% endfor %}
+ 
+
+ {% if page_obj.has_next %}
+ <a class="btn btn-outline-primary mx-1 mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+ <a class="btn btn-outline-primary mx-1 mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+ {% endif %}
+
+{% endif %}
+</div>
+{% endblock %}

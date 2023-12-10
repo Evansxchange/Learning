@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+ <div class="row justify-content-center">
+  <div class="col-lg-4">
+   <div class="card">
+    <div class="card-body">
+     <h4 class="text-center text-uppercase mb-3">
+      <b class="text-primary fw-bold">
+       sign-up 
+      </b>
+     </h4>
+
+     <form action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button type="submit" class="btn btn-primary btn-block fw-bold" style="width: 100%;">Sign UP</button>
+      <P class="text-center pt-3">
+       Already have an account? <a href="/sign-in/?next={{ request.GET.next }}"><b>Login</b></a>
+      </P>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

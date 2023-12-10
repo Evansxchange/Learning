@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+
+<div class="container-fluid mt-5">
+ <div class="row justify-content-center">
+  <div class="col-lg-5">
+   <div class="card bg-dark text-primary">
+    <div class="card-body">
+     <h4 class="text-center text-uppercase mb-3">
+      <b class="text-primary fw-bold">
+       {% if request.GET.next != '/courier/' %}
+       Update Profile 
+       {% else %}
+       Staff
+       {% endif %}
+      </b>
+     </h4>
+
+     <div class="img text-center my-3">
+      <img class="rounded-circle " width="130rem" height="130rem" src="{{ user.profile.image.url }}" alt="profile_picture">
+     </div>
+
+     <form  action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+    
+      <div class="d-flex justify-content-around">
+       {% bootstrap_form u_form show_label=False %}
+      
+      </div>
+      <div class="container-md">
+       {% bootstrap_form p_form %}
+
+      </div>
+      <button type="submit" class="btn btn-primary btn-block fw-bold" style="width: 100%;">Update</button>
+      <a href="{% url 'profile' %}" class="btn btn-outline-danger my-3 d-block">Back</a>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

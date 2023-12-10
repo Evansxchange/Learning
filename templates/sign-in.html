@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+ <div class="row justify-content-center">
+  <div class="col-lg-4">
+   <div class="card">
+    <div class="card-body">
+     <h4 class="text-center text-primary fw-bold text-uppercase mb-3">
+      <b>Login</b>
+     </h4>
+
+     <form action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form_errors form %}
+      {% bootstrap_label "Email" %}
+      {% bootstrap_field form.username show_label=False placeholder="Email" %}
+      {% bootstrap_field form.password %}
+      <button class="btn btn-primary btn-block fw-bold" style="width: 100%;">Login</button>
+      <P class="text-center pt-3">
+       Are you new? <a href="/sign-up/?next={{ request.GET.next }}"><b>Sign UP</b></a>
+      </P>
+      <p class=" text-center text-decoration-underline text-danger"><a class="text-danger" href="{% url 'password_reset' %}">Forgotten password</a></p>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock %}

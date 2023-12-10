@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<style>
+  .card{
+  box-shadow: 0 0 6px var(--clr-blue);
+ }
+
+ img{
+  box-shadow: 0 0 10px var(--clr-dark);
+ }
+</style>
+<div class="container">
+ <div class="card mx-auto bg-secondary text-light" style="width: 80%; max-width: 600px;">
+  <div class="card-body">
+   <div class="img text-center my-3">
+    <img class="rounded-circle " width="150rem" height="150rem" src="{{ user.profile.image.url }}" alt="profile_picture">
+   </div>
+    <h5 class="card-title text-center">{{ user.first_name|title }}</h5>
+    <p class="card-text text-center">{{ user.username }}</p>
+    <a href="{% url 'update_profile' %}" class="btn btn-primary d-block">Update Profile</a>
+    <a class="btn btn-outline-light mt-2 d-block" href="{% url 'new_post' %}">Create a post</a>
+  </div>
+</div>
+</div>
+
+
+
+{% endblock %}
+
+
+  

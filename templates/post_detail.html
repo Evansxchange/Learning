@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="my-3 text-center shadow bg-light mx-5 p-2">Welcome to our course page</h1>
+<div class="container-md shadow p-3 mb-5 bg-secondary rounded">
+ <div class="head d-flex px-2 align-items-center bg-light shadow-lg rounded">
+  <img class="rounded-circle" width="40rem" src="{{ object.author.profile.image.url }}" alt="">
+  <P class=" fw-bold align-self-center pt-2 mx-4"> Date Posted: {{ object.date_posted }}</P>
+ </div>
+<P class="shadow p-3 mt-3 text-start bg-white rounded fw-bold">{{ object.title|title }}</P>
+<P class="bg-white rounded p-2">{{ object.content }}</P>
+<div class="d-flex justify-content-between">
+ <a href="{% url 'courses_page' %}" class="btn btn-light">Back</a>
+ {% if object.author == user %}
+ <div class="d-flex">
+  <a href="{% url 'post_delete' object.id %}" class="btn btn-danger d-block">Delete</a>
+ <a href="{% url 'post_update' object.id %}" class="btn btn-warning d-block mx-3">Update</a>
+ </div>
+ {% endif %}
+</div>
+</div>
+{% endblock %}
