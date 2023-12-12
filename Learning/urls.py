@@ -16,19 +16,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from students import views as StudentView
 from classes import views
 from django.contrib.auth import views as form_validation
-from classes.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView
+from django.contrib.auth import views as student_form_validation
+from classes.views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView, CoursePostListView, TitlePostListView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
+    path('login/', student_form_validation.LoginView.as_view(template_name="student.html"), name='login'),
+    path('register/', StudentView.Register, name="register"),
+
 
     path('courses/', views.courses, name="courses"),
     path('courses_page/', PostListView.as_view(), name="courses_page"),
-    path('author_courses_page/<str:first_name>/' , UserPostListView.as_view(), name="author_courses_page"),
+    path('author_page/<str:first_name>/' , UserPostListView.as_view(), name="author_page"),
+    path('author_courses_page/<str:first_name>/', CoursePostListView.as_view(), name="author_courses_page"),
+    path('author_title_page/<str:first_name>/' , TitlePostListView.as_view(), name="author_title_page"),
+
     path('post/<int:pk>/', PostDetailView.as_view(), name="post_detail"),
     path('post/new', PostCreateView.as_view(), name="new_post"),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name="post_update"),

@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1 class="my-3 text-center shadow bg-light mx-5 p-2">Welcome to our course page</h1>
-{% for Posts in Posts %}
-<div class="container-md shadow p-3 mb-2 bg-light rounded">
+ {% for Posts in Posts %}
+<div class="container-md shadow p-3 mb-2 bg-light rounded {% if Posts.course == '' %} d-none {% endif %}">
  <div class="head d-flex px-2 align-items-center bg-light shadow-lg rounded">
   <img class="rounded-circle" width="40rem" src="{{ Posts.author.profile.image.url }}" alt="">
-  <p><a class="fw-bolder align-self-center mx-3 pt-2" href="{% url 'author_courses_page' Posts.author.first_name %}" >Author: {{ Posts.author.first_name|title }}</a></p>
+  <p class="fw-bolder align-self-center mx-3 pt-2"> Author: {{ Posts.author.first_name|title }}</p>
   <P class=" fw-bold align-self-center pt-2">|  Date Posted: {{ Posts.date_posted }}</P>
  </div>
-<P class="shadow p-3 mt-3 text-start bg-white shadow rounded fw-bold"><a href="{% url 'post_detail' Posts.id %}">Post-Title : {{ Posts.title|title }}</a></P>
-<P class="bg-white shadow-sm rounded p-2">{{ Posts.content }}</P>
+<P class="shadow p-3 mt-3 text-start bg-white shadow rounded fw-bold"><a href="{% url 'author_page' Posts.author.first_name %}">Course : {{ Posts.course|title }}</a></P>
 </div>
 {% endfor %}
+
 <div class="container text-center">
  {% if is_paginated %}
  

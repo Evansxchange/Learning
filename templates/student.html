@@ -8,17 +8,15 @@
    <div class="card">
     <div class="card-body">
      <h4 class="text-center text-primary fw-bold text-uppercase mb-3">
-      <b>Login</b>| staff
+      <b>Login</b> | student
      </h4>
-     <p class="text-center text-danger">Not a staff? <a class="ms-1" href="{% url 'login' %}">Student</a></p>
+     <p class="text-center text-danger">Not a student? <a class="ms-1" href="{% url 'sign-in' %}">Staff</a></p>
 
 
      <form action="" method="POST">
       {% csrf_token %}
       {% bootstrap_form_errors form %}
-      {% bootstrap_label "Email" %}
-      {% bootstrap_field form.username show_label=False placeholder="Email" %}
-      {% bootstrap_field form.password %}
+      {% bootstrap_form form %}
       <div class="d-flex align-items-center">
        <button class="btn btn-primary fw-bold me-4">Login</button>
        <p class=" text-center pt-3">Forgotten password? <a class="text-danger" href="{% url 'password_reset' %}">Reset</a></p>

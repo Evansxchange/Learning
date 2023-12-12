@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+ body {
+    font-size: 14px;
+    font-family: "Moderat","Inter",sans-serif;
+    font-weight: 400;
+    color: #333;
+}
+
+#start-payment-button {
+    cursor: pointer;
+    position: relative;
+    background-color: #ff9b00;
+    color: #12122c;
+    max-width: 30%;
+    padding: 7.5px 16px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    transition: all .1s ease-in;
+    vertical-align: middle;
+}
+</style>
+
+<form method="POST" action="https://checkout.flutterwave.com/v3/hosted/pay">
+ <div>
+   Your order is N100
+ </div>
+ <input type="hidden" name="public_key" value="FLWPUBK_TEST-1df76759f8b682021e359c2bf77c4367-X" />
+ <input type="hidden" name="customer[email]" value="evansnwadi.com" />
+ <input type="hidden" name="customer[name]" value="Evans Nwadindu" />
+ <input type="hidden" name="tx_ref" value="txref-81123" />
+ <input type="hidden" name="amount" value="100" />
+ <input type="hidden" name="currency" value="NGN" />
+ <input type="hidden" name="meta[source]" value="docs-html-test" />
+ <br>
+ <button type="submit" id="start-payment-button">Pay Now</button>
+</form>
+
+{% endblock %}

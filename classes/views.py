@@ -19,9 +19,6 @@ def home(request):
 
 @login_required()
 def courses(request):
- context = {
-  'Posts': Posts
- }
  return render(request, 'courses.html', {'nav' : 'courses'})
  
 def sign_up(request):
@@ -45,8 +42,7 @@ class PostListView(LoginRequiredMixin,  ListView):
  model = Posts
  template_name = 'courses_page.html'
  context_object_name = 'Posts'
- ordering = ["-date_posted"]
- paginate_by = 3
+ ordering = ["-date_posted"] 
 
 class UserPostListView(LoginRequiredMixin,  ListView):
  model = Posts
@@ -59,6 +55,25 @@ class UserPostListView(LoginRequiredMixin,  ListView):
   user = get_object_or_404(User, first_name=self.kwargs.get('first_name'))
   return Posts.objects.filter(author=user).order_by('-date_posted')
 
+class CoursePostListView(LoginRequiredMixin,  ListView):
+ model = Posts
+ template_name = 'author_courses_page_course.html'
+ context_object_name = 'Posts'
+ ordering = ["-date_posted"]
+
+ def get_queryset(self):
+  user = get_object_or_404(User, first_name=self.kwargs.get('first_name'))
+  return Posts.objects.filter(author=user).order_by('date_posted')
+ 
+class TitlePostListView(LoginRequiredMixin,  ListView):
+ model = Posts
+ template_name = 'author_course_title.html'
+ context_object_name = 'Posts'
+ ordering = ["date_posted"]
+
+ def get_queryset(self):
+  user = get_object_or_404(User, first_name=self.kwargs.get('first_name'))
+  return Posts.objects.filter(author=user).order_by('-date_posted') 
 
 class PostDetailView(LoginRequiredMixin,  DetailView):
  model = Posts
@@ -66,7 +81,7 @@ class PostDetailView(LoginRequiredMixin,  DetailView):
 
 class PostCreateView(LoginRequiredMixin,  CreateView):
  model = Posts
- fields = ['title', 'content']
+ fields = ['course', 'sub_course', 'title', 'sub_title', 'content']
  template_name = 'new_post.html'
  success_url = '/courses_page'
 

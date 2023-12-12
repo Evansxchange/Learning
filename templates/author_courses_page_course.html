@@ -1,18 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="my-3 text-center shadow bg-light mx-5 p-2 {% if Posts.course == '' %} d-none {% endif %} ">{% for Posts in Posts %} {{ Posts.course|title }}  {% endfor %}</h1>
-
 {% for Posts in Posts %}
-<div class="container-md shadow p-3 mb-2 bg-light rounded {% if Posts.title == '' %} d-none {% endif %}">
+<h1 class="my-3 text-center shadow bg-light mx-5 p-2 {% if Posts.course == '' %} d-none {% endif %}">{{ Posts.course|title }}</h1>
+{% endfor %}{% for Posts in Posts %}
+<div class="container-md shadow p-3 mb-2 bg-light rounded {% if Posts.course == '' %} d-none {% endif %}">
  <div class="head d-flex px-2 align-items-center bg-light shadow-lg rounded">
   <img class="rounded-circle" width="40rem" src="{{ Posts.author.profile.image.url }}" alt="">
-  <p class="fw-bolder align-self-center mx-3 pt-2" > <a href="{% url 'post_detail' Posts.id %}">Author: {{ Posts.author.first_name|title }}</a></p>
+  <p><a class="fw-bolder align-self-center mx-3 pt-2" href="" >Author: {{ Posts.author.first_name|title }}</a></p>
   <P class=" fw-bold align-self-center pt-2">|  Date Posted: {{ Posts.date_posted }}</P>
  </div>
-
-
-<P class="shadow p-3 mt-3 text-start bg-white shadow rounded  fw-bold d-flex"><a href="{% url 'author_courses_page' Posts.author.first_name %}">COURSE TITLE: <span class="text-dark ms-5">{{ Posts.sub_course|title }}</span></a></P>
-
+<P class="shadow p-3 mt-3 text-start bg-white shadow rounded fw-bold"><a href="{% url 'post_detail' Posts.id %}">Topic : {{ Posts.title|title }}</a></P>
+<P class="shadow p-3 mt-3 text-start bg-white shadow rounded fw-bold {% if Posts.sub_course == '' %} d-none {% endif %}"><a href="{% url 'post_detail' Posts.id %}">Topic : {{ Posts.sub_title|title }}</a></P>
 </div>
 {% endfor %}
 <div class="container text-center">

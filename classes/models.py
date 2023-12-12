@@ -12,13 +12,22 @@ class user(models.Model):
  confirm_password = models.CharField(max_length=50)
 
 class Posts(models.Model): 
- title = models.CharField(max_length=200)
+ course = models.CharField(max_length=200, null=False, blank=True)
+ sub_course = models.CharField(max_length=200, null=False, blank=True)
+ title = models.CharField(max_length=200, null=False, blank=True)
+ sub_title = models.CharField(max_length=200, null=False, blank=True)
  content = models.TextField()
  date_posted = models.DateTimeField(default=timezone.now)
  author = models.ForeignKey(User, on_delete=models.CASCADE)
 
  def __self__(self):
   return self.title
+ 
+ def __self__(self):
+  return self.sub_title 
+ 
+ def __self__(self):
+  return self.course 
  
  def get_absolute_url(self):
   return reverse('post_detail', kwargs={'pk':self.pk})

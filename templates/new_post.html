@@ -15,6 +15,7 @@
 
      <form action="" method="POST">
       {% csrf_token %}
+
       {% bootstrap_form form %}
       <button type="submit" class="btn btn-primary btn-block fw-bold" style="width: 100%;">Post</button>
       <a href="{% url 'profile' %}" class="btn btn-outline-danger my-3 d-block">Back</a>
